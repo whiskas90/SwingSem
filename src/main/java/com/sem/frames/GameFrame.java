@@ -17,7 +17,7 @@ public class GameFrame {
         JPanel rightPanel = new JPanel();
         JPanel bottomPanel = new JPanel();
         JPanel bottomLeftPanel = new JPanel();
-        bottomPanel.setBackground(Color.GRAY);
+        bottomPanel.setBackground(Color.LIGHT_GRAY);
 
         mainPanel.setLayout(new BorderLayout());
         JTextArea textArea = new JTextArea();
@@ -52,7 +52,6 @@ public class GameFrame {
         progressBar.setStringPainted(true);
         progressBar.setMinimum(0);
         progressBar.setMaximum(100);
-//        progressBar.setValue(0);
 
         String[] textArr = keysLogic.text.split("");
         bottomTextArea.addKeyListener(new KeyListener() {
