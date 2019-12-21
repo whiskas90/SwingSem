@@ -21,10 +21,10 @@ public class GameFrame {
 
         mainPanel.setLayout(new BorderLayout());
         JTextArea textArea = new JTextArea();
-        JTextArea bottomTextArea = new JTextArea(10,90);
+        JTextArea bottomTextArea = new JTextArea(10,110);
         bottomTextArea.setLineWrap(true);
         bottomTextArea.setWrapStyleWord(true);
-        bottomPanel.add(bottomTextArea);
+        bottomPanel.add(bottomTextArea, BorderLayout.EAST);
 
         KeyLogic keysLogic = new KeyLogic();
         if(!keysLogic.text.isEmpty()) {
@@ -34,6 +34,19 @@ public class GameFrame {
         } else {
             textArea.setText("LOL");
         }
+
+        JTextArea rightTextArea = new JTextArea(10,10);
+        rightTextArea.setLineWrap(true);
+        rightTextArea.setWrapStyleWord(true);
+
+        JButton exitButton = new JButton("Выход");
+        exitButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,exitButton.getMinimumSize().height));
+        exitButton.addActionListener((ActionEvent e)->{
+            JOptionPane.showConfirmDialog(frame,"Уверены?");
+        });
+
+        JButton sendButton = new JButton("Отправить");
+        sendButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,sendButton.getMinimumSize().height));
 
         JProgressBar progressBar = new JProgressBar();
         progressBar.setStringPainted(true);
@@ -64,15 +77,20 @@ public class GameFrame {
                     if(bottomTextArea.getText().equals(currentTextString)){
                         System.out.println("OK");
                         isOkWord = true;
+                        bottomTextArea.setForeground(Color.BLACK);
+                        if(bottomTextArea.getText().equals(keysLogic.text)){
+                            JOptionPane.showMessageDialog(frame,"Игра закончена");
+                        }
                     } else {
                         System.out.println("NO");
                         isOkWord = false;
+                        bottomTextArea.setForeground(Color.RED);
                     }
-                    double progressCountDouble = (double) currentTextLength / keysLogic.text.length();
-                    double progressCount1Double = progressCountDouble * 100;
-                    progressBar.setValue((int)progressCount1Double);
-                    System.out.println("Cure text"+ currentTextLength);
-                    System.out.println("tetx "+keysLogic.text.length());
+                    if(isOkWord) {
+                        double progressCountDouble = (double) currentTextLength / keysLogic.text.length();
+                        double progressCount1Double = progressCountDouble * 100;
+                        progressBar.setValue((int) progressCount1Double);
+                    }
                 }
             }
         });
@@ -89,6 +107,9 @@ public class GameFrame {
 
 
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.add(exitButton);
+        rightPanel.add(rightTextArea);
+        rightPanel.add(sendButton);
         rightPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         mainPanel.add(rightPanel, BorderLayout.EAST);
