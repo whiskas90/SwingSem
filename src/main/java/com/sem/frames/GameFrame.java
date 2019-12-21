@@ -5,18 +5,23 @@ import com.sem.logic.KeyLogic;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class GameFrame {
+    private boolean isOkWord = false;
 
     public GameFrame(){
         JFrame frame = getFrame();
         JPanel mainPanel = new JPanel();
         JPanel rightPanel = new JPanel();
         JPanel bottomPanel = new JPanel();
+        JPanel bottomLeftPanel = new JPanel();
+        bottomPanel.setBackground(Color.GRAY);
 
         mainPanel.setLayout(new BorderLayout());
         JTextArea textArea = new JTextArea();
-        JTextArea bottomTextArea = new JTextArea(10,100);
+        JTextArea bottomTextArea = new JTextArea(10,90);
         bottomTextArea.setLineWrap(true);
         bottomTextArea.setWrapStyleWord(true);
         bottomPanel.add(bottomTextArea);
@@ -29,6 +34,52 @@ public class GameFrame {
         } else {
             textArea.setText("LOL");
         }
+
+        JProgressBar progressBar = new JProgressBar();
+        progressBar.setStringPainted(true);
+        progressBar.setMinimum(0);
+        progressBar.setMaximum(100);
+//        progressBar.setValue(0);
+
+        String[] textArr = keysLogic.text.split("");
+        bottomTextArea.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if((e.getKeyCode() >= 32 & e.getKeyCode() <= 126) || e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+                    int currentTextLength = bottomTextArea.getText().length();
+                    String currentTextString = "";
+                    for (int i = 0; i < currentTextLength; i++) {
+                        currentTextString += textArr[i];
+                    }
+                    if(bottomTextArea.getText().equals(currentTextString)){
+                        System.out.println("OK");
+                        isOkWord = true;
+                    } else {
+                        System.out.println("NO");
+                        isOkWord = false;
+                    }
+                    double progressCountDouble = (double) currentTextLength / keysLogic.text.length();
+                    double progressCount1Double = progressCountDouble * 100;
+                    progressBar.setValue((int)progressCount1Double);
+                    System.out.println("Cure text"+ currentTextLength);
+                    System.out.println("tetx "+keysLogic.text.length());
+                }
+            }
+        });
+        bottomLeftPanel.setLayout(new BoxLayout(bottomLeftPanel, BoxLayout.Y_AXIS));
+        bottomLeftPanel.add(progressBar);
+        bottomPanel.add(bottomLeftPanel,FlowLayout.LEFT);
+
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         JScrollPane jScrollPane = new JScrollPane(textArea);
@@ -43,6 +94,8 @@ public class GameFrame {
         mainPanel.add(rightPanel, BorderLayout.EAST);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         frame.add(mainPanel);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 

@@ -1,5 +1,6 @@
 package com.sem.logic;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -18,6 +19,7 @@ public class KeyLogic {
             while (scannerFile.hasNextLine()){
                 text += scannerFile.nextLine();
             }
+//            KeyListener keyListener = new KeyListener();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
