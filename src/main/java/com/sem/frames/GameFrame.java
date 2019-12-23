@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 
 public class GameFrame {
     private boolean isOkWord = false;
+    private JProgressBar progressBar;
 
     public GameFrame(){
         JFrame frame = getFrame();
@@ -48,7 +49,7 @@ public class GameFrame {
         JButton sendButton = new JButton("Отправить");
         sendButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,sendButton.getMinimumSize().height));
 
-        JProgressBar progressBar = new JProgressBar();
+        progressBar = new JProgressBar();
         progressBar.setStringPainted(true);
         progressBar.setMinimum(0);
         progressBar.setMaximum(100);
