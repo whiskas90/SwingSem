@@ -256,30 +256,30 @@ public class Game {
     }
 
     class InGameProcess extends Thread{
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//        @Override
+//        public void run() {
+//            while (true) {
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
 //                String message = sc.nextLine();
 //                chatClient.sendMessage(message);
-                while (true) {
-                    try {
-                        chatClient.sendMessage(chatClient.getUserName() + "/hhhhh@" + getProgressBar().getValue());
-                        chatClient.sendMessage("1");
-                        Thread.sleep(500);
-                        setOpponentBarValue(chatClient.getOppoNentProgressBarVal());
-                        break;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+//                while (true) {
+//                    try {
+//                        chatClient.sendMessage(chatClient.getUserName() + "/hhhhh@" + getProgressBar().getValue());
+//                        chatClient.sendMessage("1");
+//                        Thread.sleep(500);
+//                        setOpponentBarValue(chatClient.getOppoNentProgressBarVal());
+//                        break;
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
 //                opponentBar.setValue(chatClient.getOppoNentProgressBarVal());
 //                if (message.equals("/end")) System.exit(0);
-            }
-        }
+//            }
+//        }
     }
 }

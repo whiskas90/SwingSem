@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class KeyLogic {
 
     public String text = "";
-
     public KeyLogic(){
         Random random = new Random();
         int[] textNumbers = {1,2};
